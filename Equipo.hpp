@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 using namespace std;
 
@@ -13,6 +14,7 @@ private:
     int GCon;
     int Puntos;
     int Dif_G;
+    int PJ; 
 
 public:
     Equipo();
@@ -52,10 +54,12 @@ Equipo::Equipo(string _nombreEquipo, int _PGan, int _PEmp, int _PPer, int _GFav,
 
         //Diferencia de goles
         Dif_G = GFav - GCon;
+        //Partidos Jugados
+        PJ = PGan + PEmp + PPer; 
     }
 
     void Equipo::to_string(){ 
-        cout << nombreEquipo << " " << PGan << " " << PEmp << "   " << PPer << "   " << GFav << "   " << GCon << "   " << Puntos << "     " << Dif_G << "      " <<endl; 
+        cout << setw(10) << nombreEquipo << setw(4) << PJ << setw(4) << PGan  << setw(4) << PEmp << setw(4) << PPer << setw(4) << GFav << setw(4) << GCon << setw(4) <<  Dif_G << setw(5) << Puntos <<endl; 
     }
 
 Equipo::~Equipo()

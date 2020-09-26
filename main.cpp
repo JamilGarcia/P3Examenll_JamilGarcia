@@ -30,21 +30,36 @@ string lectura(string nArchv)
 
 Equipo *CrearEquip(vector<string> lista)
 {
-    string nombre = lista[0];
-    //cout << "lista: " << lista[0] << endl; 
+    string nombre = lista[0]; 
     int PGan = stoi(lista[1]);
-    //cout << "lista: " << lista[1] << endl; 
     int PEmp = stoi(lista[2]);
-    //cout << "lista: " << lista[2] << endl; 
     int PPer = stoi(lista[3]);
-    //cout << "lista: " << lista[3] << endl; 
     int Gfav = stoi(lista[4]);
-    //cout << "lista: " << lista[4] << endl; 
     int Gcon = stoi(lista[5]);
-    //cout << "lista: " << lista[5] << endl; 
     Equipo* equip = new Equipo(nombre, PGan, PEmp, PPer, Gfav, Gcon);
     equip ->to_string(); 
     return equip;
+}
+
+void Ordenamiento(nodo* Node){
+    int TempPun = Node->getEquipo()->getPuntos(); 
+    nodo *Node2 = Node->next_node(); 
+    int TempPun2 = Node2->getEquipo()->getPuntos(); 
+    while(Node != nullptr){
+        if(TempPun <= TempPun2){
+            Node2 = Node2->next_node(); 
+            TempPun2 = Node2->getEquipo()->getPuntos(); 
+        } else if(TempPun > TempPun2){
+            TempPun = TempPun2; 
+            Node = Node2; 
+            Node2 = Node2->next_node(); 
+            TempPun2 = Node2->getEquipo()->getPuntos(); 
+        }
+    }
+
+    //Imprimir Ordenado
+    Node->to_Nstring(); 
+
 }
 
 int main()
@@ -54,16 +69,16 @@ int main()
     vector<string> listaAtri;
     listaAtri.resize(6);
     int contTemp = 0;
-    cout << Stemp << endl;
     nodo* topepila = nullptr;
     bool inicioDeLista = false;
-    nodo* primerNodo = nullptr;
+    nodo* primerNodo;
 
+    cout << "            " << "PJ   G   E   P  GA  GC  DG  PTS" <<endl; 
     for (int i = 0; i < Stemp.length(); i++)
     {
         if (Stemp[i] == '\n')
         {
-            if (!inicioDeLista)
+            if (inicioDeLista == false)
             {
                 listaAtri[contTemp] = temporal;
                 Equipo *Equip = CrearEquip(listaAtri);
@@ -98,7 +113,10 @@ int main()
             temporal += Stemp[i];
         }
     }
-
-    primerNodo->to_Nstring();
+    
+    primerNodo->to_Nstring(); 
+    Ordenamiento(primerNodo); 
+    
+    
     
 }

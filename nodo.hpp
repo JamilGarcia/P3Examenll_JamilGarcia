@@ -19,13 +19,20 @@ public:
         Nodo = PNodo;
     }
 
-    int getPuntosEq(){
-        return Equipo_->getPuntos(); 
+   nodo* next_node(){
+       return Nodo; 
+    }
+
+    Equipo* getEquipo(){
+        return Equipo_; 
     }
 
     void to_Nstring()
     {
-        Equipo_->to_string();
+        if(Nodo != nullptr){
+            Equipo_->to_string();
+            Nodo->to_Nstring();
+        }
     }
 
     ~nodo()
